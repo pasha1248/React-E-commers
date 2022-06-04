@@ -1,0 +1,51 @@
+/** @format */
+
+.content {
+  padding: 40px;
+
+  > h2 {
+    margin: 0;
+  }
+  .content__pizza {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pizza__item {
+    border: 1px solid rgba(216, 216, 216, 0.7);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 30px;
+
+    > h4 {
+      margin: 0;
+    }
+
+    > span {
+      display: flex;
+
+      > p {
+        margin: 0;
+      }
+    }
+
+    > img {
+      border-bottom: 0.5px solid grey;
+      display: flex;
+      justify-content: center;
+    }
+
+    .pizza__btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .pizza__icon {
+        font-size: 29px;
+        margin-left: 10px;
+        cursor: pointer;
+        color: grey;
+      }
+    }
+  }
+}

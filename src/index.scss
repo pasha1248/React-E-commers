@@ -1,0 +1,22 @@
+/** @format */
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+* {
+  font-family: 'Abel', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: lightgray;
+  max-width: 1080px;
+  margin: 10px auto;
+  border-radius: 20px;
+}
+
+.App {
+  background-color: white;
+  border-radius: 20px;
+}
