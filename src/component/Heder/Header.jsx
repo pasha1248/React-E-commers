@@ -5,8 +5,9 @@ import Pizza from '../../assets/Pizza.png'
 import './Header.scss'
 import { CgProfile } from 'react-icons/cg'
 import { IoIosBasket } from 'react-icons/io'
+import { useState } from 'react'
 
-const Header = () => {
+const Header = props => {
   return (
     <header className='header__container'>
       <div className='header__left'>
@@ -21,7 +22,9 @@ const Header = () => {
           <li>
             <IoIosBasket className='header__icon' />
           </li>
-          <li>1200$</li>
+          <li className='cu-p' onClick={props.onClickBasket}>
+            1200$
+          </li>
           <li>
             <CgProfile className='header__icon' />
           </li>

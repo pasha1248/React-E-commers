@@ -8,31 +8,39 @@ import { AiFillDelete } from 'react-icons/ai'
 import GreenButton from '../../UI/GreenButton'
 import { AiOutlineCloseSquare } from 'react-icons/ai'
 
-const Basket = () => {
+const Basket = ({ onClickBasket, items = [] }) => {
   return (
     <div className='overlay'>
       <div className='basket clear'>
         <h2 className='d-flex justify-between mb-10'>
-          Basket <AiOutlineCloseSquare className='cu-p opacity-5' />
+          Basket
+          <AiOutlineCloseSquare
+            onClick={onClickBasket}
+            className='cu-p opacity-5'
+          />
         </h2>
         <br />
         <div className='basket__items'>
-          <div className='basket__item d-flex align-center justify-between mb-10'>
-            <img className='mr-20' src={Pizza1} alt='Pizza' height='140px' />
-            <div className='mr-20'>
-              <p className='mb-5'>Paperoni</p>
-              <b>20 $</b>
-            </div>
-            <AiFillDelete className='basket__btn' />
-          </div>
-          <div className='basket__item d-flex align-center justify-between mb-10'>
-            <img className='mr-20' src={Pizza1} alt='Pizza' height='140px' />
-            <div className='mr-20'>
-              <p className='mb-5'>Paperoni</p>
-              <b>20 $</b>
-            </div>
-            <AiFillDelete className='basket__btn' />
-          </div>
+          {items.map(obj => {
+            return (
+              <div
+                key={obj.pizza.name}
+                className='basket__item d-flex align-center justify-between mb-10'
+              >
+                <img
+                  className='mr-20'
+                  src={Pizza1}
+                  alt='Pizza'
+                  height='140px'
+                />
+                <div className='mr-20'>
+                  <p className='mb-5'>{obj.pizza.name}</p>
+                  <b>{obj.pizza.price}</b>
+                </div>
+                <AiFillDelete className='basket__btn' />
+              </div>
+            )
+          })}
         </div>
         <div className='total__btn mb-40 pb-40'>
           <ul className='basket__total-block'>
