@@ -22,6 +22,18 @@
   display: flex;
   flex-direction: column;
 
+  .info__info {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .info__img {
+      font-size: 200px;
+      color: green;
+      align-items: center;
+    }
+  }
+
   h2 {
     margin: 0;
     text-align: center;

@@ -4,10 +4,13 @@ import './GreenButton.scss'
 import 'macro-css'
 import React from 'react'
 
-const GreenButton = () => {
+const GreenButton = ({ text, onClick }) => {
   return (
-    <button className='green-button d-flex align-center justify-center'>
-      <span>Send order</span> <AiOutlineArrowRight className='btn__arr' />
+    <button
+      onClick={onClick}
+      className='green-button d-flex align-center justify-center'
+    >
+      <span>{text}</span> <AiOutlineArrowRight className='btn__arr' />
     </button>
   )
 }
