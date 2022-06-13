@@ -7,6 +7,7 @@ import foto from './assets/Pizza/Pizza1.png'
 import axios from 'axios'
 import { Routes, Route } from 'react-router-dom'
 import MyFollow from './pages/MyFollow'
+import Orders from './pages/Orders'
 
 export const AppContext = React.createContext({})
 
@@ -20,22 +21,26 @@ function App() {
 
   React.useEffect(() => {
     async function fetchData() {
-      setIsReady(true)
-      const cartsResponse = await axios.get(
-        'https://629de039c6ef9335c0a8e1d3.mockapi.io/cart'
-      )
+      try {
+        const cartsResponse = await axios.get(
+          'https://629de039c6ef9335c0a8e1d3.mockapi.io/cart'
+        )
 
-      const favoriteResponse = await axios.get(
-        'https://629de039c6ef9335c0a8e1d3.mockapi.io/fevorites'
-      )
-      const itemsResponse = await axios.get(
-        'https://629de039c6ef9335c0a8e1d3.mockapi.io/items'
-      )
+        const favoriteResponse = await axios.get(
+          'https://629de039c6ef9335c0a8e1d3.mockapi.io/fevorites'
+        )
+        const itemsResponse = await axios.get(
+          'https://629de039c6ef9335c0a8e1d3.mockapi.io/items'
+        )
 
-      setPizzaItem(cartsResponse.data)
-      setFevorite(favoriteResponse.data)
-      setPizza(itemsResponse.data)
-      setIsReady(false)
+        setPizzaItem(cartsResponse.data)
+        setFevorite(favoriteResponse.data)
+        setPizza(itemsResponse.data)
+        setIsReady(false)
+      } catch (error) {
+        alert('error')
+        console.log(error)
+      }
     }
     fetchData()
   }, [])
@@ -61,15 +66,14 @@ function App() {
 
   const onAddToCard = async obj => {
     if (pizzaItem.find(item => Number(item.id) === Number(obj.id))) {
-      axios.delete(`https://629de039c6ef9335c0a8e1d3.mockapi.io/cart/${obj.id}`)
-
       setPizzaItem(prev => prev.filter(el => Number(el.id) !== Number(obj.id)))
+
+      axios.delete(`https://629de039c6ef9335c0a8e1d3.mockapi.io/cart/${obj.id}`)
     } else {
       const { data } = await axios.post(
         'https://629de039c6ef9335c0a8e1d3.mockapi.io/cart',
         obj
       )
-
       setPizzaItem(prev => [...pizzaItem, data])
     }
   }
@@ -80,11 +84,12 @@ function App() {
   const removePizzaBasket = id => {
     axios.delete(`https://629de039c6ef9335c0a8e1d3.mockapi.io/cart/${id}`)
     //   .then(res => setPizzaItem(res.data))
-    setPizzaItem(prev => prev.filter(item => item.id !== id))
+    setPizzaItem(prev => prev.filter(item => Number(item.id) !== Number(id)))
   }
 
   const isItemAdded = el => {
     console.log(pizzaItem, el)
+    pizzaItem.forEach(el => console.log(el.pizza))
 
     return pizzaItem.some(obj => Number(obj.pizza.id) === Number(el.id))
   }
@@ -101,16 +106,15 @@ function App() {
       }}
     >
       <div className='App'>
-        {openBasket ? (
+        <div>
           <Basket
             items={pizzaItem}
             onClickBasket={() => setOpenBasket(!openBasket)}
             removePizzaBasket={removePizzaBasket}
             openBasket={openBasket}
           />
-        ) : (
-          ''
-        )}
+        </div>
+
         <Header onClickBasket={() => setOpenBasket(!openBasket)} />
         <Routes>
           <Route
@@ -133,6 +137,7 @@ function App() {
               <MyFollow items={fevorite} onAddFavorite={onAddFavorite} />
             }
           />
+          <Route path='/orders' element={<Orders />} />
         </Routes>
       </div>
     </AppContext.Provider>

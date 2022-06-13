@@ -64,7 +64,10 @@ const PizzaCart = ({
           <div className='pizza__btn'>
             <span>
               <span style={{ marginRight: '10px' }}>PRICE: </span>
-              <b>{pizza.pizza.price}</b>
+              <b>
+                <span>$</span>
+                {pizza.pizza.price}
+              </b>
             </span>
             <div>
               {isItemAdded(pizza.pizza) ? (

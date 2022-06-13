@@ -15,7 +15,12 @@ import Info from './Info'
 import axios from 'axios'
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-const Basket = ({ onClickBasket, items = [], removePizzaBasket }) => {
+const Basket = ({
+  onClickBasket,
+  items = [],
+  removePizzaBasket,
+  openBasket,
+}) => {
   const [orderComplete, setOrderComplete] = useState(false)
   const { pizzaItem, setPizzaItem } = useContext(AppContext)
   const [orderId, setOrderId] = useState(null)
@@ -44,9 +49,13 @@ const Basket = ({ onClickBasket, items = [], removePizzaBasket }) => {
       alert('error :(')
     }
   }
+  const totalPrice = pizzaItem.reduce(
+    (sum, obj) => Number(obj.pizza.price) + sum,
+    0
+  )
 
   return (
-    <div className='overlay'>
+    <div className={`overlay ${openBasket ? 'overlayVisible' : ''}`}>
       <div className='basket clear'>
         <h2 className='d-flex justify-between mb-10'>
           Basket
@@ -118,13 +127,13 @@ const Basket = ({ onClickBasket, items = [], removePizzaBasket }) => {
                 <li>
                   <span>Total:</span>
                   <div></div>
-                  <b>40 $</b>
+                  <b style={{ fontSize: '25px' }}>{totalPrice}$</b>
                 </li>
-                <li>
+                {/* <li>
                   <span>Cost:</span>
                   <div></div>
-                  <b>40 $</b>
-                </li>
+                  <b></b>
+                </li> */}
               </ul>
               <GreenButton onClick={onClickOrder} text={'Send Pizza'} />
             </div>

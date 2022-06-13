@@ -8,8 +8,16 @@ import { IoIosBasket } from 'react-icons/io'
 import { useState } from 'react'
 import { BsFillHeartFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
+import { AppContext } from '../../App'
 
 const Header = props => {
+  const { pizzaItem } = React.useContext(AppContext)
+
+  const totalPrice = pizzaItem.reduce(
+    (sum, obj) => Number(obj.pizza.price) + sum,
+    0
+  )
+
   return (
     <header className='header__container clear'>
       <Link to='/'>
@@ -25,17 +33,19 @@ const Header = props => {
         <ul>
           <li>
             <Link to='/favorite'>
-              <BsFillHeartFill className='header__icon' />
+              <BsFillHeartFill className='header__icon heard' />
             </Link>
           </li>
-          <li>
+          <li onClick={props.onClickBasket}>
             <IoIosBasket className='header__icon' />
           </li>
           <li className='cu-p' onClick={props.onClickBasket}>
-            1200$
+            <strong style={{ fontSize: '25px' }}>$ {totalPrice}</strong>
           </li>
           <li>
-            <CgProfile className='header__icon' />
+            <Link to='/orders'>
+              <CgProfile className='header__icon' />
+            </Link>
           </li>
         </ul>
       </div>

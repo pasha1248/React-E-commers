@@ -44,5 +44,13 @@ header {
     color: rgb(223, 160, 160);
     font-size: 2rem;
     cursor: pointer;
+    transition: all 0.3s ease-in;
+
+    &:active {
+      color: rgb(163, 83, 54);
+    }
+    &:hover {
+      color: black;
+    }
   }
 }
