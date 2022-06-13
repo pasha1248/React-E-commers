@@ -24,7 +24,6 @@ const Basket = ({
   const [orderComplete, setOrderComplete] = useState(false)
   const { pizzaItem, setPizzaItem } = useContext(AppContext)
   const [orderId, setOrderId] = useState(null)
-  const [loading, setLoading] = useState(false)
 
   const onClickOrder = async () => {
     try {

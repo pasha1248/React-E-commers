@@ -21,7 +21,6 @@ const Orders = () => {
       console.log(
         setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []))
       )
-      console.log(orders)
     })()
   }, [])
 

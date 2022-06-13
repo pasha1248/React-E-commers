@@ -6,8 +6,6 @@ import React from 'react'
 import { FcSearch } from 'react-icons/fc'
 import ContentLoader from 'react-content-loader'
 
-import { useState } from 'react'
-import axios from 'axios'
 import PizzaCart from './PizzaCart/PizzaCart'
 
 const Content = ({

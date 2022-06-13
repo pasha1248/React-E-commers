@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import Content from './component/Content/Content'
 import Header from './component/Heder/Header'
 import Basket from './component/basket/Basket'
-import foto from './assets/Pizza/Pizza1.png'
 import axios from 'axios'
 import { Routes, Route } from 'react-router-dom'
 import MyFollow from './pages/MyFollow'
@@ -12,7 +11,6 @@ import Orders from './pages/Orders'
 export const AppContext = React.createContext({})
 
 function App() {
-  const [title, setTitle] = useState(1)
   const [openBasket, setOpenBasket] = useState(false)
   const [pizzaItem, setPizzaItem] = useState([])
   const [fevorite, setFevorite] = useState([])
